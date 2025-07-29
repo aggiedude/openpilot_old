@@ -114,19 +114,11 @@ class HudRenderer(Widget):
       COLORS.header_gradient_end,
     )
 
-    rl.draw_text_ex(
-      self._font_medium,
-      f"DAW: {self.daw_status}",
-      rl.Vector2(rect.x + 60, rect.y + 300),
-      40,
-      0,
-      COLORS.white
-    )
-
     if self.is_cruise_available:
       self._draw_set_speed(rect)
 
     self._draw_current_speed(rect)
+    self._draw_daw_status(rect)
 
     button_x = rect.x + rect.width - UI_CONFIG.border_size - UI_CONFIG.button_size
     button_y = rect.y + UI_CONFIG.border_size
@@ -134,6 +126,13 @@ class HudRenderer(Widget):
 
   def handle_mouse_event(self) -> bool:
     return bool(self._exp_button.handle_mouse_event())
+
+  def _draw_daw_status(self, rect: rl.Rectangle) -> None:
+    """Draw the current daw level."""
+    daw_text = str(round(self.daw_status))
+    daw_text_size = measure_text_cached(self._font_bold, daw_text, FONT_SIZES.current_speed)
+    daw_pos = rl.Vector2(rect.x + rect.width / 2 - daw_text_size.x / 2, rect.y + rect.height / 2 - daw_text_size.y / 2)
+    rl.draw_text_ex(self._font_bold, daw_text, daw_pos, FONT_SIZES.current_speed, 0, COLORS.white)
 
   def _draw_set_speed(self, rect: rl.Rectangle) -> None:
     """Draw the MAX speed indicator box."""
