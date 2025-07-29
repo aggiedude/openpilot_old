@@ -64,7 +64,7 @@ class HudRenderer(Widget):
     self.set_speed: float = SET_SPEED_NA
     self.speed: float = 0.0
     self.v_ego_cluster_seen: bool = False
-    self.daw_status = 5
+    self.daw_status: int = 5
 
     self._font_semi_bold: rl.Font = gui_app.font(FontWeight.SEMI_BOLD)
     self._font_bold: rl.Font = gui_app.font(FontWeight.BOLD)
@@ -112,6 +112,15 @@ class HudRenderer(Widget):
       UI_CONFIG.header_height,
       COLORS.header_gradient_start,
       COLORS.header_gradient_end,
+    )
+
+    rl.draw_text_ex(
+      self._font_medium,
+      f"DAW: {self.daw_status}",
+      rl.Vector2(rect.x + 60, rect.y + 300),
+      40,
+      0,
+      COLORS.white
     )
 
     if self.is_cruise_available:
