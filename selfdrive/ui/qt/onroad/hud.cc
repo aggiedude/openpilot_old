@@ -61,10 +61,19 @@ void HudRenderer::draw(QPainter &p, const QRect &surface_rect) {
 }
 
 void HudRenderer::drawDAWStatus(QPainter &p, const QRect &surface_rect) {
-  QString dawStr = QString::number(std::nearbyint(daw));
+  // Match the set speed box size/position
+  const QSize default_size = {172, 204};
+  QSize set_speed_size = is_metric ? QSize(200, 204) : default_size;
+  QRect set_speed_rect(QPoint(60 + (default_size.width() - set_speed_size.width()) / 2, 45), set_speed_size);
 
-  p.setFont(InterFont(176, QFont::Bold));
-  drawText(p, surface_rect.center().x(), surface_rect.center().y(), dawStr);
+  // Y position just below set speed box
+  int daw_y = set_speed_rect.bottom() + 20;
+
+  // Draw DAW status text
+  QString dawStr = QString("DAW: %1").arg(daw);
+  p.setFont(InterFont(40, QFont::Bold));
+  p.setPen(QColor(255, 255, 255));
+  p.drawText(set_speed_rect.x(), daw_y, set_speed_rect.width(), 50, Qt::AlignHCenter, dawStr);
 }
 
 void HudRenderer::drawSetSpeed(QPainter &p, const QRect &surface_rect) {
