@@ -91,6 +91,12 @@ void HudRenderer::drawDAWStatus(QPainter &p, const QRect &surface_rect) {
   p.setBrush(box_color);
   p.drawRoundedRect(daw_rect, 32, 32);
 
+  // Label text: "DAW"
+  QRect label_rect = daw_rect.adjusted(0, 15, 0, -140);
+  p.setFont(InterFont(35, QFont::DemiBold));
+  p.setPen(Qt::white);
+  p.drawText(label_rect, Qt::AlignHCenter | Qt::AlignTop, "DAW");
+
   // Draw DAW level number
   QString daw_str = QString::number(daw);
   p.setFont(InterFont(90, QFont::Bold));
