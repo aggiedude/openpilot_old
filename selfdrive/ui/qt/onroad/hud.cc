@@ -61,19 +61,41 @@ void HudRenderer::draw(QPainter &p, const QRect &surface_rect) {
 }
 
 void HudRenderer::drawDAWStatus(QPainter &p, const QRect &surface_rect) {
-  // Match the set speed box size/position
+  // Match the size of the set speed box
   const QSize default_size = {172, 204};
-  QSize set_speed_size = is_metric ? QSize(200, 204) : default_size;
-  QRect set_speed_rect(QPoint(60 + (default_size.width() - set_speed_size.width()) / 2, 45), set_speed_size);
+  QSize daw_box_size = is_metric ? QSize(200, 204) : default_size;
 
-  // Y position just below set speed box
-  int daw_y = set_speed_rect.bottom() + 20;
+  // Position below the set speed box
+  int x = 60 + (default_size.width() - daw_box_size.width()) / 2;
+  int y = 45 + daw_box_size.height() + 20;  // 20 px below set speed
 
-  // Draw DAW status text
-  QString dawStr = QString("DAW: %1").arg(daw);
-  p.setFont(InterFont(40, QFont::Bold));
-  p.setPen(QColor(255, 255, 255));
-  p.drawText(set_speed_rect.x(), daw_y, set_speed_rect.width(), 50, Qt::AlignHCenter, dawStr);
+  QRect daw_rect(QPoint(x, y), daw_box_size);
+
+  // Determine box color
+  QColor box_color;
+  if (daw == 5) {
+    box_color = QColor(0x80, 0xd8, 0xa6, 204);  // green
+  } else if (daw >= 2 && daw <= 4) {
+    box_color = QColor(255, 204, 0, 204);       // yellow
+  } else if (daw == 1) {
+    box_color = QColor(255, 0, 0, 204);         // red
+  } else {
+    return;  // Invalid or unsupported level
+  }
+
+  // Border color (translucent white)
+  QColor border_color = QColor(255, 255, 255, 75);
+
+  // Draw rounded background box
+  p.setPen(QPen(border_color, 6));
+  p.setBrush(box_color);
+  p.drawRoundedRect(daw_rect, 32, 32);
+
+  // Draw DAW level number
+  QString daw_str = QString::number(daw);
+  p.setFont(InterFont(90, QFont::Bold));
+  p.setPen(Qt::white);
+  p.drawText(daw_rect.adjusted(0, 77, 0, 0), Qt::AlignTop | Qt::AlignHCenter, daw_str);
 }
 
 void HudRenderer::drawSetSpeed(QPainter &p, const QRect &surface_rect) {
