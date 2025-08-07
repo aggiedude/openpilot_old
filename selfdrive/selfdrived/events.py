@@ -846,7 +846,7 @@ EVENTS: dict[int, dict[str, Alert | AlertCallbackType]] = {
       "Driver Inattentive",
       "Attention Level Critical",
       AlertStatus.critical,
-      AlertSize.medium,
+      AlertSize.mid,
       Priority.HIGH,
       VisualAlert.none,
       AudibleAlert.warningImmediate,
