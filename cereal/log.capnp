@@ -129,6 +129,8 @@ struct OnroadEvent @0xc4fa6047f024e718 {
     aeb @92;
     userFlag @95;
     excessiveActuation @96;
+    dawLevel2 @97;
+    dawLevel1 @98;
 
     soundsUnavailableDEPRECATED @47;
   }
