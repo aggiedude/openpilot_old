@@ -61,16 +61,6 @@ void HudRenderer::draw(QPainter &p, const QRect &surface_rect) {
 }
 
 void HudRenderer::drawDAWStatus(QPainter &p, const QRect &surface_rect) {
-  // Match the size of the set speed box
-  const QSize default_size = {172, 204};
-  QSize daw_box_size = is_metric ? QSize(200, 204) : default_size;
-
-  // Position below the set speed box
-  int x = 60 + (default_size.width() - daw_box_size.width()) / 2;
-  int y = 45 + daw_box_size.height() + 20;  // 20 px below set speed
-
-  QRect daw_rect(QPoint(x, y), daw_box_size);
-
   // Determine box color
   QColor box_color;
   if (daw == 5) {
@@ -82,6 +72,16 @@ void HudRenderer::drawDAWStatus(QPainter &p, const QRect &surface_rect) {
   } else {
     return;  // Invalid or unsupported level
   }
+
+  // Match the size of the set speed box
+  const QSize default_size = {172, 204};
+  QSize daw_box_size = is_metric ? QSize(200, 204) : default_size;
+
+  // Position below the set speed box
+  int x = 60 + (default_size.width() - daw_box_size.width()) / 2;
+  int y = 45 + daw_box_size.height() + 20;  // 20 px below set speed
+
+  QRect daw_rect(QPoint(x, y), daw_box_size);
 
   // Border color (translucent white)
   QColor border_color = QColor(255, 255, 255, 75);
