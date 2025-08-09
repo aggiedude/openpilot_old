@@ -21,7 +21,7 @@ protected:
   void drawSetSpeed(QPainter &p, const QRect &surface_rect);
   void drawCurrentSpeed(QPainter &p, const QRect &surface_rect);
   void drawText(QPainter &p, int x, int y, const QString &text, int alpha = 255);
-  void drawDAWStatus(QPainter &p, const QRect &surface_rect);
+  //void drawDAWStatus(QPainter &p, const QRect &surface_rect);
 
   float speed = 0;
   //int daw = 5;
