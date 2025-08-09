@@ -17,7 +17,7 @@ void HudRenderer::updateState(const UIState &s) {
     is_cruise_set = false;
     set_speed = SET_SPEED_NA;
     speed = 0.0;
-    daw = 5;
+    //daw = 5;
     return;
   }
 
@@ -33,7 +33,7 @@ void HudRenderer::updateState(const UIState &s) {
     set_speed *= KM_TO_MILE;
   }
 
-  daw = car_state.getDawStatus();
+  //daw = car_state.getDawStatus();
 
   // Handle older routes where vEgoCluster is not set
   v_ego_cluster_seen = v_ego_cluster_seen || car_state.getVEgoCluster() != 0.0;
@@ -55,7 +55,7 @@ void HudRenderer::draw(QPainter &p, const QRect &surface_rect) {
     drawSetSpeed(p, surface_rect);
   }
   drawCurrentSpeed(p, surface_rect);
-  drawDAWStatus(p, surface_rect);
+  //drawDAWStatus(p, surface_rect);
 
   p.restore();
 }

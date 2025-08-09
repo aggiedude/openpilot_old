@@ -24,7 +24,7 @@ protected:
   void drawDAWStatus(QPainter &p, const QRect &surface_rect);
 
   float speed = 0;
-  int daw = 5;
+  //int daw = 5;
   float set_speed = 0;
   bool is_cruise_set = false;
   bool is_cruise_available = true;
