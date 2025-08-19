@@ -848,7 +848,7 @@ EVENTS: dict[int, dict[str, Alert | AlertCallbackType]] = {
       AlertSize.small,
       Priority.MID,
       VisualAlert.none,
-      AudibleAlert.warningSoft,
+      AudibleAlert.none,
       2.0,
     ),
   },
